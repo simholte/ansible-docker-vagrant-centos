@@ -1,0 +1,28 @@
+---
+- name: install docker
+  hosts: all
+  sudo: yes
+  tasks:
+    - name: Downloading and enable the EPEL repository definitions.
+      action: command rpm -Uvh --replacepkgs http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+    - name: Install Docker
+      yum: pkg=docker-io state=present
+
+    - name: Install Python pip
+      yum: pkg=python-pip state=present
+
+    - name: Install Docker.py
+      pip: name=docker-py state=present version=1.2.3
+
+    - name: Start service
+      service: name=docker state=started
+
+    - name: Install dockerui image
+      docker:
+        name: dockerui
+        image: dockerui/dockerui
+        state: reloaded
+        volumes: /var/run/docker.sock:/var/run/docker.sock
+        ports:
+        - "9000:9000"

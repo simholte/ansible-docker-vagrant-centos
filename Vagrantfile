@@ -17,6 +17,7 @@ Vagrant.configure(2) do |config|
  config.vm.network "private_network", ip: "192.168.33.100"
   config.vm.hostname = "docker"
   config.vm.network "forwarded_port", guest: 9000, host: 9000
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -72,7 +73,7 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get install -y apache2
   # SHELL
   config.vm.provision :ansible do |ansible|
-    ansible.playbook = "install_docker.yml"
+    ansible.playbook = "main.yml"
     ansible.verbose  = "v"
   end
 end

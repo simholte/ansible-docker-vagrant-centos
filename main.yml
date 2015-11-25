@@ -1,0 +1,7 @@
+---
+- name: install docker
+  hosts: all
+  sudo: yes
+  tasks:
+    - include: tasks/install_docker.yml
+    - include: tasks/build_spring_boot.yml

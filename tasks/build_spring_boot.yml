@@ -1,0 +1,3 @@
+---
+  - name: create bootApp
+    docker_image: path="files" name="springboot/app" state=present

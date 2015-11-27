@@ -1,0 +1,28 @@
+---
+  - set_fact:
+      build_dir: /tmp/lb
+
+  - name: create directory for files
+    file: path={{ build_dir }} state=directory mode=0755
+
+  - name: copy supporting files
+    copy: src={{ item }} dest={{ build_dir }}
+    with_items:
+      - consul-template.service
+      - nginx.conf
+      - nginx.service
+
+  - name: copy and rename the lb dockerfile
+    copy: src=loadBalancerDockerfile dest={{ build_dir }}/Dockerfile
+
+  - name: create lb image
+    docker_image: path={{ build_dir }} name="springboot/lb" state=present
+
+  - name: start docker lb
+    docker:
+      name: nginxlb
+      image: springboot/lb
+      state: reloaded
+      volumes: /tmp
+      ports:
+        - "8080:80"

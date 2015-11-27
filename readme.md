@@ -1,11 +1,11 @@
 ## Spring Boot Application inside of a Docker container##
 
 ###Pre-reqs for Mac OSX###
-brew cask install virtualbox
-brew cask install vagrant
-brew cask install vagrant-manager
-*Vagrant-Manager helps you manage all your virtual machines in one place directly from the menubar.*
-brew install ansible
+1. brew cask install virtualbox
+2. brew cask install vagrant
+3. brew cask install vagrant-manager
+4. *Vagrant-Manager helps you manage all your virtual machines in one place directly from the menubar.*
+5. brew install ansible
 
 
 

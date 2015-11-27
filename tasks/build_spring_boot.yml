@@ -1,3 +1,24 @@
 ---
+  - name: install libselinux
+    yum: pkg=libselinux-python state=present
+
+  - name: create directory for files
+    file: path=/tmp/files state=directory mode=0755
+
+  - name: copy files
+    copy: src=files/sample-spring-boot-0.0.1-SNAPSHOT.jar dest=/tmp/files
+
+  - name: copy more files
+    copy: src=Dockerfile dest=/tmp
+
   - name: create bootApp
-    docker_image: path="files" name="springboot/app" state=present
+    docker_image: path="/tmp" name="springboot/app" state=present
+
+  - name: start docker bootApp
+    docker:
+      name: dockerspringboot
+      image: springboot/app
+      state: reloaded
+      volumes: /tmp
+      ports:
+        - "8080:8080"

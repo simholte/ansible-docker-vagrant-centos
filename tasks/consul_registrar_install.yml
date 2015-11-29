@@ -1,0 +1,23 @@
+---
+- name: install consul
+  docker:
+    name: consul
+    command: -server -bootstrap 
+    image: progrium/consul:latest
+    state: started
+    ports:
+      - "8300:8300"
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53/udp"
+
+- name: install registrar
+  docker:
+    name: registrar
+    command: -internal consul://consul:8500
+    image: gliderlabs/registrator:latest
+    state: started
+    links:
+      - "consul:aliasconsul"
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock"

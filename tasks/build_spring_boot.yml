@@ -16,9 +16,13 @@
 
   - name: start docker bootApp
     docker:
-      name: dockerspringboot
       image: springboot/app
-      state: reloaded
+      state: started
+      count: 3
       volumes: /tmp
+      env:
+        SERVICE_80_NAME: http
+        SERVICE_NAME: app
+        SERVICE_TAGS: production
       ports:
         - "8080"

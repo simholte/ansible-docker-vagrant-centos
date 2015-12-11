@@ -16,7 +16,7 @@ To do that I used nginx as a reverse proxy load balance, https://consul.io/ as a
 To run the application simply type
 `vagrant up`
 
-Once complete the following sites will be available:
-The consul UI can be found  http://localhost:8500/ui/
-The Docker UI can be found http://localhost:9000/
-The actual SpringBoot Rest call can be executed by going to http://localhost:8080/
+Once complete the following sites will be available: <br/>
+The consul UI can be found  http://localhost:8500/ui/ <br/>
+The Docker UI can be found http://localhost:9000/ <br/>
+The actual SpringBoot Rest call can be executed by going to http://localhost:8080/ <br/>
